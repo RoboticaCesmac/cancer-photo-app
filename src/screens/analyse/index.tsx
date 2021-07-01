@@ -14,31 +14,40 @@ import ProcessingComponent from './components/processing';
 import ResultComponent from './components/results';
 import { useState } from 'react';
 import api from '../../provider/api';
+import { ENV } from './../../config/env';
 
 export interface AnalyseScreenProps {
 }
 
 export type ResultAnalyse = {
-    cancer: boolean,
+    hasCancer: boolean,
+    value: string,
     probability: number
 }
 
 export function AnalyseScreen (props: AnalyseScreenProps) {
 
-    const nav = useNavigation();
     const [ step, setStep ] = useState(1);  
     const [ imageBase64, setImageBase64 ] = useState<string|false>(false);
     const [ resultAnalyse, setResultAnalyse ] = useState<ResultAnalyse|null>(null);
 
     //Functions
-    const saveImage = async function(base64: string) {
-        setImageBase64('data:image/png;base64,' + base64);
+    const saveImage = async function(image: string) {
+        setImageBase64('data:image/png;base64,' + image);
         setStep(2);
-        //const { data } = await api.post('/photo', {base64});
-        await new Promise((resolve, erro) => setTimeout(() => resolve('a'), 5000));
-        const data = {cancer: true, probability: 0.932312};
-        setResultAnalyse(data)
-        setStep(3);
+        try {
+            console.log('A')
+            console.log(ENV.API_URL)
+            const { data } = await api.post('/image', {image});
+            console.log(data)
+            setResultAnalyse({hasCancer: data.value == "1", probability: Number(data.acc), value: data.value_name})
+            //await new Promise((resolve, erro) => setTimeout(() => resolve('a'), 5000));
+            setStep(3);
+        } catch(e) {
+            console.log(e)
+            Alert.alert('Falha', 'Falha na comunicação com o servidor');
+            setStep(1)
+        }
     }
 
     const handleCamera = React.useCallback(async () => {
@@ -92,7 +101,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
         <View style={{flex:1}}>
             <AppHeader title="Análise" />
                 {step == 1 && <AnalyseComponent handleCamera={handleCamera} handleLibrary={handleLibrary}/>}
-                {step == 2 && imageBase64 != false && <ProcessingComponent image={imageBase64} />}
+                {step == 2 && imageBase64 != false && <ProcessingComponent image={imageBase64} cancel={handleBack} />}
                 {step == 3 && <ResultComponent result={resultAnalyse} image={imageBase64} handleBack={handleBack} />}
             <AppFooter/>
         </View>

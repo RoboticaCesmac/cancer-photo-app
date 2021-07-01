@@ -4,6 +4,7 @@ import { useFonts, Spartan_400Regular, Spartan_700Bold } from '@expo-google-font
 import { LoadingScreen } from './src/loading';
 import { StatusBar, View } from 'react-native';
 
+
 export default function App() {
   const [fontsLoaded] = useFonts({ Spartan_400Regular, Spartan_700Bold });
 

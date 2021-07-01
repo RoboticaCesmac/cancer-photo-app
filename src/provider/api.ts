@@ -1,7 +1,8 @@
 import Axios from 'axios';
+import { ENV } from '../config/env';
 
 const api = Axios.create({
-    baseURL: 'http://localhost:8000/api'
+    baseURL: ENV.API_URL
 });
 
 export default api;

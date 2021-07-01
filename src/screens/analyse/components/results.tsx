@@ -28,12 +28,12 @@ const ResultComponent = function(props: ResultComponentProps) {
         
             <View style={styles.probability}>
                 <Text style={[styles.label, {fontWeight:'bold'}]}>Probabilidade: </Text>
-                {!result.cancer && <Text style={[styles.label, {color:'green'}]}>Não possui cancer ({percentage(result.probability)}%)</Text>}
-                {result.cancer && <Text style={[styles.label, {color:'tomato'}]}>Pode possuir cancer ({percentage(result.probability)}%)</Text>}
+                {!result.hasCancer && <Text style={[styles.label, {color:'green'}]}>Não possui cancer ({percentage(result.probability)}%)</Text>}
+                {result.hasCancer && <Text style={[styles.label, {color:'tomato'}]}>Pode possuir cancer ({percentage(result.probability)}%)</Text>}
             </View>
 
-            {!result.cancer && <Text style={[styles.label, {textAlign:'center'}]}>Após a análise da foto, o algoritmo não encontrou sinal de câncer</Text>}
-            {result.cancer && <Text style={[styles.label, {textAlign:'center'}]}>É recomendado procurar um especialista para uma análise mais precisa</Text>}
+            {!result.hasCancer && <Text style={[styles.label, {textAlign:'center'}]}>Após a análise da foto, o algoritmo não encontrou sinal de câncer</Text>}
+            {result.hasCancer && <Text style={[styles.label, {textAlign:'center'}]}>É recomendado procurar um especialista para uma análise mais precisa</Text>}
 
             <ButtonImage onPress={handleBack} icon="arrow-back" label="Voltar" />
         </View>

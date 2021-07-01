@@ -2,8 +2,10 @@ import * as React from 'react';
 import { memo } from 'react';
 import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import { AppColors, AppFonts } from '../../../theme';
+import { ButtonImage } from './button';
 export interface ProcessingComponentProps {
     image:string;
+    cancel():string;
 }
 
 /**
@@ -18,6 +20,7 @@ const ProcessingComponent = function (props: ProcessingComponentProps) {
             <Image source={{uri:props.image}} style={{height:300, width: 300}} />
             <ActivityIndicator size={80} color={AppColors.primary}/>
             <Text style={styles.description}>Está etapa pode demorar alguns minutos</Text>
+            <ButtonImage onPress={props.cancel} label="Cancelar" icon="arrow-back" />
         </View>
     );
 }
