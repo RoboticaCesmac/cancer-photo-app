@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
+import { ENV } from '../config/env';
 
 export function LoadingScreen () {
     return (
@@ -7,7 +8,7 @@ export function LoadingScreen () {
         <Text>AppCancer</Text>
         <Text>Centro de Inovação Tecnológica</Text>
         <Text>@carloswgama</Text>
-        <Text>Versão: 0.0.1</Text>
+        <Text>Versão: {ENV.VERSION}</Text>
     </View>
     );
 }
