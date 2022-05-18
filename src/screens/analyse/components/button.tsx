@@ -6,7 +6,7 @@ import { AppFonts } from '../../../theme/fonts';
 import { TouchableOpacity } from 'react-native';
 
 export interface ButtonImageProps {
-    icon: string;
+    icon?: string;
     label: string;
     onPress():void;
 }
@@ -15,7 +15,7 @@ export function ButtonImage (props: ButtonImageProps) {
     return (
       <TouchableOpacity onPress={props.onPress}>  
         <View style={styles.container}>
-                <MaterialIcons name={props.icon} size={30} color="white"/> 
+                {props.icon && <MaterialIcons name={props.icon} size={30} color="white"/> }
                 <Text style={styles.label}>{props.label}</Text>
         </View>
       </TouchableOpacity>  
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.primary,
         padding: 20, 
         borderRadius: 10,
-        height: 60,
+        height: 70,
         width: 140,
         marginHorizontal: 30
     },

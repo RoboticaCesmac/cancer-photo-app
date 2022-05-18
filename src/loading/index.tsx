@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { ENV } from '../config/env';
+import { ENV } from './../config/env';
 
 export function LoadingScreen () {
     return (
