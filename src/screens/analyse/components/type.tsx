@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { AppColors, AppFonts } from '../../../theme';
+import { TypeAnalyses } from '../../../types/type-analyse';
 import { ButtonImage } from './button';
 
-export interface TypeAnalysesProps {
-    handleSelectType(type:'cancer'|'leucoplasia'):void;
+export interface TypeAnalyseProps {
+    handleSelectType(type:TypeAnalyses):void;
 }
 
-const TypeAnalyses = (props: TypeAnalysesProps) => {
+const TypeAnalyse = (props: TypeAnalyseProps) => {
     const { handleSelectType } = props;
     return (
       <View style={styles.container}>
@@ -22,7 +23,7 @@ const TypeAnalyses = (props: TypeAnalysesProps) => {
     );
 }
 
-export default React.memo(TypeAnalyses)
+export default React.memo(TypeAnalyse)
 
 const styles = StyleSheet.create({
     container: {

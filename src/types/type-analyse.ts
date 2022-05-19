@@ -1,0 +1,1 @@
+export type TypeAnalyses = 'cancer'|'leucoplasia'

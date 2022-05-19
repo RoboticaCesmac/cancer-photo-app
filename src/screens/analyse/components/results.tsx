@@ -4,11 +4,13 @@ import { ButtonImage } from './button';
 import { AppColors, AppFonts } from '../../../theme';
 import { ResultAnalyse } from '..';
 import { memo } from 'react';
+import { TypeAnalyses } from '../../../types/type-analyse';
 
 export interface ResultComponentProps {
     image:string;
     result: ResultAnalyse;
     handleBack():void;
+    type: TypeAnalyses;
 }
 
 /**
@@ -17,7 +19,7 @@ export interface ResultComponentProps {
  * @returns 
  */
 const ResultComponent = function(props: ResultComponentProps) {
-    const { result, image, handleBack } = props;
+    const { result, image, handleBack, type } = props;
     
     //Bota numa escala de porcentagem levando de 0.5-1
     const percentage = (value:number) => {
@@ -37,12 +39,12 @@ const ResultComponent = function(props: ResultComponentProps) {
         
             <View style={styles.probability}>
                 <Text style={[styles.label, {fontWeight:'bold'}]}>Probabilidade: </Text>
-                {!result.hasCancer && <Text style={[styles.label, {color:'green'}]}>Falso positivo para Leucoplástia ({percentage(result.probability)}%)</Text>}
-                {result.hasCancer && <Text style={[styles.label, {color:'tomato'}]}>Possibilidade de Leucoplástia ({percentage(result.probability)}%)</Text>}
+                {!result.positive && <Text style={[styles.label, {color:'green'}]}>Falso positivo ({percentage(result.probability)}%)</Text>}
+                {result.positive && <Text style={[styles.label, {color:'tomato'}]}>Possibilidade de {result.type} ({percentage(result.probability)}%)</Text>}
             </View>
 
-            {!result.hasCancer && <Text style={[styles.label, {textAlign:'center'}]}>Após a análise da foto, o algoritmo não encontrou sinal significativo para leucoplástia</Text>}
-            {result.hasCancer && <Text style={[styles.label, {textAlign:'center'}]}>É recomendado procurar um especialista para uma análise mais precisa</Text>}
+            {!result.positive && <Text style={[styles.label, {textAlign:'center'}]}>Após a análise da foto, o algoritmo não encontrou sinal significativo para {result.type}</Text>}
+            {result.positive && <Text style={[styles.label, {textAlign:'center'}]}>É recomendado procurar um especialista para uma análise mais precisa</Text>}
 
             <ButtonImage onPress={handleBack} icon="arrow-back" label="Voltar" />
         </View>

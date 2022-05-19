@@ -25,7 +25,7 @@ export function AnalyseComponent (props: AnalyseComponentProps) {
             <Text style={styles.description}>Para realizar a análise é preciso que tire uma foto ou selecione da sua galeria uma foto da boca do paciente, que esteja mais ou menos de acordo com o modelo abaixo.</Text>
             <Text style={styles.descriptionExample}>Seguir o modelo - {type == 'cancer' ? 'Câncer' : 'Leucoplasia'}</Text>
 
-            <Image style={styles.model} source={(type == 'cancer' ? imgCancer : imgLeucoplasia)}/>
+            <Image resizeMode='contain' style={styles.model} source={(type == 'cancer' ? imgCancer : imgLeucoplasia)}/>
         
             <View style={styles.buttons}>
                 <ButtonImage onPress={handleCamera} icon="photo-camera" label="Câmera" />
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     model: {
-        width: 250,
-        height: 170
+        maxWidth: 250,
+        maxHeight: 200
     }
 });
