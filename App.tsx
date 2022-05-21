@@ -7,6 +7,7 @@ import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 export default function App() {
@@ -26,13 +27,12 @@ export default function App() {
       setUpdated(true)
     })()
   }, [])
-
   if (!fontsLoaded || !updated) return <LoadingScreen />;
   
   return (
-    <View style={{flex:1}}>
+    <GestureHandlerRootView style={{flex:1}}>
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       <MainNavigation />
-    </View>
+    </GestureHandlerRootView>
   );
 }

@@ -9,18 +9,26 @@ export interface ButtonImageProps {
     icon?: string;
     label: string;
     onPress():void;
+    style?:object;
+    size?:'normal'|'small';
 }
 
 export function ButtonImage (props: ButtonImageProps) {
     return (
       <TouchableOpacity onPress={props.onPress}>  
-        <View style={styles.container}>
+        <View style={[styles.container, (props.size=='small' ? {width:100, height: 60} : {}), props.style ]}>
                 {props.icon && <MaterialIcons name={props.icon} size={30} color="white"/> }
-                <Text style={styles.label}>{props.label}</Text>
+                <Text style={[styles.label, (props.size == 'small' ? {fontSize: 9} : {})]}>{props.label}</Text>
         </View>
       </TouchableOpacity>  
     );
 }
+
+ButtonImage.defaultProps = {
+    style: {},
+    size: 'normal'
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -36,6 +44,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontFamily: AppFonts.bold,
+        textAlign: 'center',
         color: 'white',
         textTransform: 'uppercase'
     }
