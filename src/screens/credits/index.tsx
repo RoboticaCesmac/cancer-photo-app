@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Image } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import AppFooter from '../../components/footer';
 import AppHeader from '../../components/header';
 import { AppColors } from '../../theme/colors';
@@ -33,7 +34,7 @@ export function CreditsScreen (props: CreditsScreenProps) {
     return (
         <View style={{flex:1}}>
             <AppHeader title="Créditos" />
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
 
                 <Text style={[styles.text, {textAlign:'center', marginBottom: 20}]}>Este é um Projeto desenvolvido no Centro Universitário CESMAC entre os membros:</Text>
                 {names.map((name, key) => (
@@ -46,7 +47,7 @@ export function CreditsScreen (props: CreditsScreenProps) {
                         <Image source={require('./../../assets/logos/cit.png')} />
                     </View>
                 </View>
-            </View>
+            </ScrollView>
             <AppFooter/>
         </View>
     );

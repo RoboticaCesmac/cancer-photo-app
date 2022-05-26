@@ -18,7 +18,7 @@ export function ButtonImage (props: ButtonImageProps) {
       <TouchableOpacity onPress={props.onPress}>  
         <View style={[styles.container, (props.size=='small' ? {width:100, height: 60} : {}), props.style ]}>
                 {props.icon && <MaterialIcons name={props.icon} size={30} color="white"/> }
-                <Text style={[styles.label, (props.size == 'small' ? {fontSize: 9} : {})]}>{props.label}</Text>
+                <Text style={[styles.label, (props.size == 'small' ? {fontSize: 8} : {})]}>{props.label}</Text>
         </View>
       </TouchableOpacity>  
     );
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
         backgroundColor: AppColors.primary,
         padding: 20, 
         borderRadius: 10,
-        height: 70,
-        width: 140,
+        height: 75,
+        width: 150,
         marginHorizontal: 30
     },
     label: {

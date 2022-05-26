@@ -15,6 +15,9 @@ import { useState } from 'react';
 import api from '../../provider/api';
 import { ENV } from './../../config/env';
 import { TypeAnalyses } from '../../types/type-analyse';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Dimensions } from 'react-native';
+
 
 export interface AnalyseScreenProps {
 }
@@ -33,16 +36,17 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
     const [ resultAnalyse, setResultAnalyse ] = useState<ResultAnalyse|null>(null);
 
     //Functions
-    const saveImage = async function(image: string) {
+    const saveImage = React.useCallback(async function(image: string) {
         setImageBase64('data:image/png;base64,' + image);
         setStep(3);
         try {
             console.log('A')
             console.log(ENV.API_URL)
-            //const { data } = await api.post('/image', {image});
-            const data = { value: "1", acc: 0.93, value_name: (type == 'cancer' ? 'Câncer' : 'Leucoplasia') }; //Exemplo
+            const { data } = await api.post(`/${type}`, {image});
+            // const data = { value: "1", acc: 0.93, value_name:'Positivo' type: (type == 'cancer' ? 'Câncer' : 'Leucoplasia') }; //Exemplo
+            console.log(type)
             console.log(data) 
-            setResultAnalyse({positive: data.value == "1", probability: Number(data.acc), type: data.value_name})
+            setResultAnalyse({positive: data.value == "1", probability: Number(data.acc), type: data.type})
             //await new Promise((resolve, erro) => setTimeout(() => resolve('a'), 5000));
             setStep(4);
         } catch(e) {
@@ -50,7 +54,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             Alert.alert('Falha', 'Falha na comunicação com o servidor');
             setStep(2)
         }
-    }
+    }, [type])
 
     const handleSelectType = React.useCallback(async (type) => {
         setType(type)
@@ -77,7 +81,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             saveImage(result.base64)
 
         console.log('Camera');
-    }, []);
+    }, [type]);
     
     const handleLibrary = React.useCallback(async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -108,24 +112,24 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
     return (
         <View style={{flex:1}}>
             <AppHeader title="Análise" />
-                {step == 1 && <TypeAnalyse handleSelectType={handleSelectType} />}
-                {step == 2 && <AnalyseComponent type={type} handleCamera={handleCamera} handleLibrary={handleLibrary} handleBack={handleBack} />}
-                {step == 3 && imageBase64 != false && <ProcessingComponent image={imageBase64} cancel={handleBack} />}
-                {step == 4 && <ResultComponent type={type} result={resultAnalyse} image={imageBase64} handleBack={handleBack} />}
+                <ScrollView style={styles.scrollview} contentContainerStyle={{minHeight: (Dimensions.get('window').height - 150)}}>
+                    {step == 1 && <TypeAnalyse handleSelectType={handleSelectType} />}
+                    {step == 2 && <AnalyseComponent type={type} handleCamera={handleCamera} handleLibrary={handleLibrary} handleBack={handleBack} />}
+                    {step == 3 && imageBase64 != false && <ProcessingComponent image={imageBase64} cancel={handleBack} />}
+                    {step == 4 && <ResultComponent type={type} result={resultAnalyse} image={imageBase64} handleBack={handleBack} />} 
+                </ScrollView>
             <AppFooter/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    scrollview: {
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         marginTop: -20,
-        flex: 1,
+        flex:1, 
         backgroundColor: AppColors.background,
-        padding: 20,
-        alignItems: 'center',
     },
     description: {
         color: AppColors.text,

@@ -30,11 +30,7 @@ export default memo(ProcessingComponent)
 
 const styles = StyleSheet.create({
     container: {
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        marginTop: -20,
         flex: 1,
-        backgroundColor: AppColors.background,
         padding: 20,
         alignItems: 'center',
     },

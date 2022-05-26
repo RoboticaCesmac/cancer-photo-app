@@ -32,7 +32,7 @@ const TypeAnalyse = (props: TypeAnalyseProps) => {
             
         </View>
 
-        <Modalize ref={modal} modalTopOffset={200}>
+        <Modalize ref={modal} modalTopOffset={300}>
             <ScrollView contentContainerStyle={styles.modalContainer}>
                 <Text style={styles.modalTitle}>AJUDE A ESCOLHER</Text>
                 <Text style={styles.modalTitle}>LESÕES POTENCIALMENTE MALIGNAS</Text>
@@ -92,12 +92,8 @@ const styles = StyleSheet.create({
     modalFont: {fontSize: 14, textAlign: 'right', marginTop: 30},
 
     container: {
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        marginTop: -20,
-        flex: 1,
-        backgroundColor: AppColors.background,
         padding: 20,
+        flex: 1,
         alignItems: 'center',
     },
     description: {

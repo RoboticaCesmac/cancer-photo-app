@@ -39,8 +39,9 @@ const ResultComponent = function(props: ResultComponentProps) {
         
             <View style={styles.probability}>
                 <Text style={[styles.label, {fontWeight:'bold'}]}>Probabilidade: </Text>
-                {!result.positive && <Text style={[styles.label, {color:'green'}]}>Falso positivo ({percentage(result.probability)}%)</Text>}
-                {result.positive && <Text style={[styles.label, {color:'tomato'}]}>Possibilidade de {result.type} ({percentage(result.probability)}%)</Text>}
+                {!result.positive && <Text style={[styles.label, {color:'green'}]}>Falso positivo</Text>}
+                {/* (Confiança: {percentage(result.probability)}%) */}
+                {result.positive && <Text style={[styles.label, {color:'tomato'}]}>Possibilidade de {result.type}</Text>}
             </View>
 
             {!result.positive && <Text style={[styles.label, {textAlign:'center'}]}>Após a análise da foto, o algoritmo não encontrou sinal significativo para {result.type}</Text>}
@@ -55,11 +56,7 @@ export default memo(ResultComponent);
 
 const styles = StyleSheet.create({
     container: {
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        marginTop: -20,
         flex: 1,
-        backgroundColor: AppColors.background,
         padding: 20,
         alignItems: 'center',
     },

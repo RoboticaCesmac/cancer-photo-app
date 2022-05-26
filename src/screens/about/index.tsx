@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import AppFooter from '../../components/footer';
 import AppHeader from '../../components/header';
 import { AppColors } from '../../theme/colors';
@@ -12,7 +13,7 @@ export function AboutScreen (props: AboutScreenProps) {
     return (
         <View style={{flex:1}}>
             <AppHeader title="Sobre" />
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
 
                 <Text style={styles.welcome}>Bem vindo</Text>
 
@@ -28,7 +29,7 @@ export function AboutScreen (props: AboutScreenProps) {
                 <View style={{flex:1, justifyContent: 'flex-end', marginRight: 30}}>
                     <Image source={require('./../../assets/arrow.png')} style={{alignSelf:'center'}} />
                 </View>
-            </View>
+            </ScrollView>
             <AppFooter/>
         </View>
     );
