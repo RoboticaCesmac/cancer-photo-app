@@ -8,10 +8,11 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#035e7b"
+      "backgroundColor": "#ec3237"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/daa44b4f-6699-4d1f-a543-699257c9840b"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,11 +24,19 @@
       "package": "br.com.carloswgama.cancerbucal",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#ec3237"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "daa44b4f-6699-4d1f-a543-699257c9840b"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

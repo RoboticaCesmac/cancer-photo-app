@@ -16,19 +16,10 @@ export function CreditsScreen (props: CreditsScreenProps) {
         'José Marcos dos Santos Oliveira',
         'Sonia Maria Soares Ferreira  (Coordenadora)',
         'Carlos Alberto Correia Lessa Filho',
-        'Ticiano Gomes do Nascimento',
-        'Josealdo Tonholo ',
-        'Isabel Cristina Celerino de Moraes Porto',
-        'Alan John Duarte de Freitas',
         'Catarina Rodrigues Rosa de Oliveira',
-        'Natanael Barbosa dos Santos',
-        'Dávida Maria Ribeiro Cardoso dos Santos',
-        'Ingrid Ferreira Leite', 
-        'Maria Cicera de Cerqueira Albuquerque', 
-        'Camila Maria Beder Ribeiro Girish Panjwani', 
-        'André Luiz dos Santos Oliveira', 
-        'Laís Farias Azevedo de Magalhães Oliveira',
-        'Larissa Tinô de Carvalho Silva'
+        'Ingrid Ferreira Leite',
+        'Ivisson Alexandre Pereira da Silva',
+        'Anne Caroline dos Santos Barbosa'
     ];
 
     return (
@@ -40,7 +31,7 @@ export function CreditsScreen (props: CreditsScreenProps) {
                 {names.map((name, key) => (
                     <Text style={styles.text} key={key}>- {name}</Text>
                 ))}
-                <View style={{flex:1, justifyContent:'flex-end'}}>
+                <View style={{flex:1, justifyContent:'flex-end', marginTop: 20}}>
                     <Image source={require('./../../assets/logos/cesmac.png')} style={{alignSelf:'center'}}/>
                     <View style={{justifyContent:'space-around', flexDirection: 'row', marginTop:10}}>
                         <Image source={require('./../../assets/logos/mpps.png')} />

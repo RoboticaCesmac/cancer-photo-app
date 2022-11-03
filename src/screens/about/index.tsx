@@ -26,7 +26,7 @@ export function AboutScreen (props: AboutScreenProps) {
 
                 <Text style={styles.description}>   O aplicativo utilizará inteligência artificial para gerar uma predição se um paciente pode possuir ou não câncer bucal, por meio de fotos. Lembrando que essa é uma análise prévia e não 100% exata, devendo ser acompanhado por um especialista.</Text>
                 <Text style={styles.description}>Para iniciar a avaliação, acesse o menu de análise abaixo!</Text>
-                <View style={{flex:1, justifyContent: 'flex-end', marginRight: 30}}>
+                <View style={{flex:1, justifyContent: 'flex-end', marginRight: 30, marginBottom: 15}}>
                     <Image source={require('./../../assets/arrow.png')} style={{alignSelf:'center'}} />
                 </View>
             </ScrollView>
