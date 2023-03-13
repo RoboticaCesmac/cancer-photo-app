@@ -38,6 +38,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
     //Functions
     const saveImage = React.useCallback(async function(image: string) {
         setImageBase64('data:image/png;base64,' + image);
+        console.log(imageBase64.substr(0, 30))
         setStep(3);
         try {
             console.log('A')
@@ -76,9 +77,9 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             quality: 1,
             base64: true
         });
-
-        if (!result.cancelled && result.base64 != null)
-            saveImage(result.base64)
+        console.log(result)
+        if (!result.canceled && result.assets[0].base64 != null)
+            saveImage(result.assets[0].base64)
 
         console.log('Camera');
     }, [type]);
@@ -97,9 +98,9 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             quality: 1,
             base64: true
         });
-
-        if (!result.cancelled && result.base64 != null)
-            saveImage(result.base64)
+        
+        if (!result.canceled && result.assets[0].base64 != null)
+            saveImage(result.assets[0].base64)
 
         console.log('Biblioteca');
     }, []);
