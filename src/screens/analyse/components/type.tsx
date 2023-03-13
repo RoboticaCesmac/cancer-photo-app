@@ -27,9 +27,8 @@ const TypeAnalyse = (props: TypeAnalyseProps) => {
         <View style={styles.buttons}>
             <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('cancer')}  label="Câncer" size='small'  />
             <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('leucoplasia')}  label="Leucoplasia" size='small' />
-            <ButtonImage style={{margin: 5, width: 110}} onPress={() => Alert.alert('Não implementado ainda')}  label="Eritroplasia"  size='small' />
-            <ButtonImage style={{margin: 5, width: 110}} onPress={() => Alert.alert('Não implementado ainda')}  label="Leucoeritroplasia" size='small' />
-            
+            <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('eritroplasia')}  label="Eritroplasia"  size='small' />
+            <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('qa')}  label="Queilite Actinica " size='small' />
         </View>
 
         <Modalize ref={modal} modalTopOffset={300}>

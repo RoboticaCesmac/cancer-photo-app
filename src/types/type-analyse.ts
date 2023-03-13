@@ -1,1 +1,1 @@
-export type TypeAnalyses = 'cancer'|'leucoplasia'
+export type TypeAnalyses = 'cancer'|'leucoplasia'|'eritroplasia'|'qa'

@@ -37,15 +37,16 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
 
     //Functions
     const saveImage = React.useCallback(async function(image: string) {
+    // const saveImage = async function(image: string) {
+        
         setImageBase64('data:image/png;base64,' + image);
         console.log(imageBase64.substr(0, 30))
         setStep(3);
         try {
             console.log('A')
-            console.log(ENV.API_URL)
+            console.log(`${ENV.API_URL}/${type}`)            
             const { data } = await api.post(`/${type}`, {image});
             // const data = { value: "1", acc: 0.93, value_name:'Positivo' type: (type == 'cancer' ? 'Câncer' : 'Leucoplasia') }; //Exemplo
-            console.log(type)
             console.log(data) 
             setResultAnalyse({positive: data.value == "1", probability: Number(data.acc), type: data.type})
             //await new Promise((resolve, erro) => setTimeout(() => resolve('a'), 5000));
@@ -55,7 +56,8 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             Alert.alert('Falha', 'Falha na comunicação com o servidor');
             setStep(2)
         }
-    }, [type])
+    // }
+    }, [type]);
 
     const handleSelectType = React.useCallback(async (type) => {
         setType(type)
@@ -78,10 +80,12 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             base64: true
         });
         console.log(result)
-        if (!result.canceled && result.assets[0].base64 != null)
-            saveImage(result.assets[0].base64)
+        if (!result.canceled && result.assets[0].base64 != null) {
+            console.log('Camera');
+            console.log(saveImage);
+            await saveImage(result.assets[0].base64)
+        }
 
-        console.log('Camera');
     }, [type]);
     
     const handleLibrary = React.useCallback(async () => {
@@ -99,11 +103,13 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             base64: true
         });
         
-        if (!result.canceled && result.assets[0].base64 != null)
-            saveImage(result.assets[0].base64)
+        if (!result.canceled && result.assets[0].base64 != null){
+            console.log('Biblioteca');
+            console.log(saveImage);
+            await saveImage(result.assets[0].base64)
+        }
 
-        console.log('Biblioteca');
-    }, []);
+    }, [type]);
 
     const handleBack = React.useCallback(async () => {
         setStep(1);

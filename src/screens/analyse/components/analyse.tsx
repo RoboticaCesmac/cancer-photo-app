@@ -4,12 +4,15 @@ import { ButtonImage } from './button';
 import { AppColors, AppFonts } from '../../../theme';
 import imgCancer from './../../../assets/modelos/cancer.jpg';
 import imgLeucoplasia from './../../../assets/modelos/leucoplasia.jpg';
+import imgEritroplasia from './../../../assets/modelos/eritroplasia.jpg';
+import imgQa from './../../../assets/modelos/qa.jpg';
+import { TypeAnalyses } from '../../../types/type-analyse';
 
 export interface AnalyseComponentProps {
     handleCamera():void;
     handleLibrary():void;
     handleBack():void;
-    type:'cancer'|'leucoplasia'
+    type:'cancer'|'leucoplasia'|'eritroplasia'|'qa'
 }
 
 /**
@@ -19,13 +22,27 @@ export interface AnalyseComponentProps {
  */
 export function AnalyseComponent (props: AnalyseComponentProps) {
     const { handleCamera, handleLibrary, handleBack, type } = props;
+
+    const nameType = (type: TypeAnalyses) => {
+        if (type == 'cancer') return 'Câncer';
+        if (type == 'leucoplasia') return 'Leucoplasia';
+        if (type == 'eritroplasia') return 'Eritroplasia';
+        return 'Queilite Actinica';
+    }
+
+    const imgType = (type: TypeAnalyses) => {
+        if (type == 'cancer') return imgCancer;
+        if (type == 'leucoplasia') return imgLeucoplasia;
+        if (type == 'eritroplasia') return imgEritroplasia;
+        if (type == 'qa') return imgQa;
+    }
     
     return (
         <View style={styles.container}>
             <Text style={styles.description}>Para realizar a análise é preciso que tire uma foto ou selecione da sua galeria uma foto da boca do paciente, que esteja mais ou menos de acordo com o modelo abaixo.</Text>
-            <Text style={styles.descriptionExample}>Seguir o modelo - {type == 'cancer' ? 'Câncer' : 'Leucoplasia'}</Text>
+            <Text style={styles.descriptionExample}>Seguir o modelo - {nameType(type)} </Text>
 
-            <Image resizeMode='contain' style={styles.model} source={(type == 'cancer' ? imgCancer : imgLeucoplasia)}/>
+            <Image resizeMode='contain' style={styles.model} source={imgType(type)}/>
         
             <View style={styles.buttons}>
                 <ButtonImage onPress={handleCamera} icon="photo-camera" label="Câmera" />
