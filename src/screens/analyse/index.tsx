@@ -39,12 +39,11 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
 
     //Functions
     const saveImage = React.useCallback(async function(image: string) {
-    // const saveImage = async function(image: string) {
-
+    
         image = image.replace(/(?:\r\n|\r|\n)/g, '');
         
         setImageBase64('data:image/png;base64,' + image);
-        console.log(imageBase64.substr(0, 30))
+        
         setStep(3);
         try {
             console.log('A')
@@ -62,10 +61,10 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             Alert.alert('Falha', 'Falha na comunicação com o servidor');
             setStep(2)
         }
-    // }
+    
     }, [type]);
 
-    const handleSelectType = React.useCallback(async (type) => {
+    const handleSelectType = React.useCallback(async function(type) {
         setType(type)
         console.log('Selecionado:', type);
         setStep(2)
@@ -91,11 +90,12 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             console.log(saveImage);
             if (image.base64)
                 await saveImage(image.base64)
+                    .catch(erro => console.log(erro))
         }
 
-    }, [saveImage]);
+    }, [type, saveImage]);
     
-    const handleLibrary = React.useCallback(async () => {
+    const handleLibrary = React.useCallback(async function() {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         //Erro
         if (status !== "granted") {
@@ -116,11 +116,12 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             console.log(saveImage);
             if (image.base64)
                 await saveImage(image.base64)
+                    .catch(erro => console.log(erro))
         }
 
-    }, [saveImage]);
+    }, [type, saveImage]);
 
-    const handleBack = React.useCallback(async () => {
+    const handleBack = React.useCallback(async function() {
         setStep(1);
     }, []);
 
