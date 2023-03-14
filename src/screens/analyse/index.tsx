@@ -17,6 +17,8 @@ import { ENV } from './../../config/env';
 import { TypeAnalyses } from '../../types/type-analyse';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Dimensions } from 'react-native';
+import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
+
 
 
 export interface AnalyseScreenProps {
@@ -38,6 +40,8 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
     //Functions
     const saveImage = React.useCallback(async function(image: string) {
     // const saveImage = async function(image: string) {
+
+        image = image.replace(/(?:\r\n|\r|\n)/g, '');
         
         setImageBase64('data:image/png;base64,' + image);
         console.log(imageBase64.substr(0, 30))
@@ -52,7 +56,9 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             //await new Promise((resolve, erro) => setTimeout(() => resolve('a'), 5000));
             setStep(4);
         } catch(e) {
-            console.log(e)
+            console.log(JSON.stringify(e))
+
+            
             Alert.alert('Falha', 'Falha na comunicação com o servidor');
             setStep(2)
         }
@@ -76,17 +82,18 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
         const result = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
-            quality: 1,
-            base64: true
+            quality: 1
         });
-        console.log(result)
-        if (!result.canceled && result.assets[0].base64 != null) {
+        
+        if (!result.canceled) {
+            const image = await manipulateAsync(result.assets[0].uri, [],{ compress: 1, base64: true });
             console.log('Camera');
             console.log(saveImage);
-            await saveImage(result.assets[0].base64)
+            if (image.base64)
+                await saveImage(image.base64)
         }
 
-    }, [type]);
+    }, [saveImage]);
     
     const handleLibrary = React.useCallback(async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -103,13 +110,15 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             base64: true
         });
         
-        if (!result.canceled && result.assets[0].base64 != null){
-            console.log('Biblioteca');
+        if (!result.canceled) {
+            const image = await manipulateAsync(result.assets[0].uri, [],{ compress: 1, base64: true });
+            console.log('Galeria');
             console.log(saveImage);
-            await saveImage(result.assets[0].base64)
+            if (image.base64)
+                await saveImage(image.base64)
         }
 
-    }, [type]);
+    }, [saveImage]);
 
     const handleBack = React.useCallback(async () => {
         setStep(1);
