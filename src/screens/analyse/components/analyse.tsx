@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Switch } from 'react-native';
 import { ButtonImage } from './button';
 import { AppColors, AppFonts } from '../../../theme';
 import imgCancer from './../../../assets/modelos/cancer.jpg';
@@ -12,6 +12,8 @@ export interface AnalyseComponentProps {
     handleCamera():void;
     handleLibrary():void;
     handleBack():void;
+    handleSave():void;
+    save: boolean;
     type:'cancer'|'leucoplasia'|'eritroplasia'|'qa'
 }
 
@@ -21,7 +23,7 @@ export interface AnalyseComponentProps {
  * @returns 
  */
 export function AnalyseComponent (props: AnalyseComponentProps) {
-    const { handleCamera, handleLibrary, handleBack, type } = props;
+    const { handleCamera, handleLibrary, handleBack, type, save, handleSave } = props;
 
     const nameType = (type: TypeAnalyses) => {
         if (type == 'cancer') return 'Câncer';
@@ -43,6 +45,12 @@ export function AnalyseComponent (props: AnalyseComponentProps) {
             <Text style={styles.descriptionExample}>Seguir o modelo - {nameType(type)} </Text>
 
             <Image resizeMode='contain' style={styles.model} source={imgType(type)}/>
+
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
+                <Text style={styles.textSave}>Usar sua foto para melhorar nossa IA?</Text>
+                <Switch value={save} onChange={handleSave} />
+            </View>
+        
         
             <View style={styles.buttons}>
                 <ButtonImage onPress={handleCamera} icon="photo-camera" label="Câmera" />
@@ -69,6 +77,11 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         fontFamily: AppFonts.bold,
         fontSize: 20,
+    },
+    textSave: {
+        fontFamily: AppFonts.regular,
+        fontSize: 16,
+        textAlign: 'center'
     },
     buttons: {
         flexDirection:'row',

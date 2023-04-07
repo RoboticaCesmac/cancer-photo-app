@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import AppFooter from '../../components/footer';
 import AppHeader from '../../components/header';
 import { AppColors } from '../../theme/colors';
 import { AppFonts } from '../../theme/fonts';
 import * as ImagePicker from 'expo-image-picker';
-import { Alert } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { AnalyseComponent } from './components/analyse';
 import TypeAnalyse from './components/type';
@@ -34,6 +33,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
 
     const [ step, setStep ] = useState(1);  
     const [ type, setType ] = useState<TypeAnalyses>('cancer');  
+    const [ save, setSave ] = useState(false);  
     const [ imageBase64, setImageBase64 ] = useState<string|false>(false);
     const [ resultAnalyse, setResultAnalyse ] = useState<ResultAnalyse|null>(null);
 
@@ -48,7 +48,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
         try {
             console.log('A')
             console.log(`${ENV.API_URL}/${type}`)            
-            const { data } = await api.post(`/${type}`, {image});
+            const { data } = await api.post(`/${type}`, {image, save});
             // const data = { value: "1", acc: 0.93, value_name:'Positivo' type: (type == 'cancer' ? 'Câncer' : 'Leucoplasia') }; //Exemplo
             console.log(data) 
             setResultAnalyse({positive: data.value == "1", probability: Number(data.acc), type: data.type})
@@ -64,12 +64,13 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
     
     }, [type]);
 
+    //======
     const handleSelectType = React.useCallback(async function(type) {
         setType(type)
         console.log('Selecionado:', type);
         setStep(2)
     }, []);
-
+    //======
     const handleCamera = React.useCallback(async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         //Erro
@@ -94,7 +95,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
         }
 
     }, [type, saveImage]);
-    
+    //======
     const handleLibrary = React.useCallback(async function() {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         //Erro
@@ -120,7 +121,18 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
         }
 
     }, [type, saveImage]);
+    //======
+    const handleSave = React.useCallback(function() {
 
+        if (!save) {
+            Alert.alert('Você deseja liberar a sua foto para nossa base de treinamento?', 'Ao confirmar essa ação, você aceita que a sua foto seja usada na nossa base de treinamento para melhorar a IA. Mas fique tranquilo, que nenhuma imagem é disponibilizada ao público, sendo usada exclusivamente para o treinamento da IA.',
+            [
+                { text: 'Confirmar', onPress: () => setSave(true) },
+                { text: 'Não salvar', onPress: () => setSave(false) }
+            ] )
+        } else setSave(false)
+    }, [save])
+    //======
     const handleBack = React.useCallback(async function() {
         setStep(1);
     }, []);
@@ -131,7 +143,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             <AppHeader title="Análise" />
                 <ScrollView style={styles.scrollview} contentContainerStyle={{minHeight: (Dimensions.get('window').height - 150)}}>
                     {step == 1 && <TypeAnalyse handleSelectType={handleSelectType} />}
-                    {step == 2 && <AnalyseComponent type={type} handleCamera={handleCamera} handleLibrary={handleLibrary} handleBack={handleBack} />}
+                    {step == 2 && <AnalyseComponent type={type} handleCamera={handleCamera} handleLibrary={handleLibrary} handleBack={handleBack} handleSave={handleSave} save={save} />}
                     {step == 3 && imageBase64 != false && <ProcessingComponent image={imageBase64} cancel={handleBack} />}
                     {step == 4 && <ResultComponent type={type} result={resultAnalyse} image={imageBase64} handleBack={handleBack} />} 
                 </ScrollView>

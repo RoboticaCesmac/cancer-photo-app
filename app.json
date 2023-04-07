@@ -10,10 +10,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ec3237"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/daa44b4f-6699-4d1f-a543-699257c9840b"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -30,13 +26,16 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "daa44b4f-6699-4d1f-a543-699257c9840b"
-      }
-    },
     "runtimeVersion": {
       "policy": "sdkVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3f23243b-ffe2-4068-b4ad-5537278b3359"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3f23243b-ffe2-4068-b4ad-5537278b3359"
     }
   }
 }
