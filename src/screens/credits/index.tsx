@@ -31,6 +31,9 @@ export function CreditsScreen (props: CreditsScreenProps) {
                 {names.map((name, key) => (
                     <Text style={styles.text} key={key}>- {name}</Text>
                 ))}
+
+
+                <Text style={styles.textSpecial}>AGRADECIMENTO À EQUIPE DO NÚCLEO DE DIAGNÓSTICO BUCAL (NDB UFES),  AS PROFESSORAS DANIELLE CAMISASCA, LILIANA BARROS, TÂNIA VELLOSO, VANESSA DE CARLA BATISTA DOS SANTOS e ADRIANA TEREZINHA NEVES NOVELINO ALVES POR DISPONIBILIZAR IMAGENS PARA A REALIZAÇÃO DO APLICATIVO.</Text>
                 <View style={{flex:1, justifyContent:'flex-end', marginTop: 20}}>
                     <Image source={require('./../../assets/logos/cesmac.png')} style={{alignSelf:'center'}}/>
                     <View style={{justifyContent:'space-around', flexDirection: 'row', marginTop:10}}>
@@ -56,5 +59,15 @@ const styles = StyleSheet.create({
     text: {
         color: AppColors.text,
         fontFamily: AppFonts.regular
+    },
+    textSpecial: {
+        color: AppColors.text,
+        fontFamily: AppFonts.regular,
+        margin: 10,
+        textAlign: 'justify',
+        fontSize: 12,
+        borderWidth: 1,
+        borderColor: 'lightgrey',
+        padding: 5
     }
 });
