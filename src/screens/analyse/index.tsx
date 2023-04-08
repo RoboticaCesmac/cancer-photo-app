@@ -62,7 +62,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             setStep(2)
         }
     
-    }, [type]);
+    }, [type, save]);
 
     //======
     const handleSelectType = React.useCallback(async function(type) {
