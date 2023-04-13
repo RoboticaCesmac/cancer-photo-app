@@ -79,19 +79,30 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             return;
         }
 
-        const result = await ImagePicker.launchCameraAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            quality: 1
-        });
-        
-        if (!result.canceled) {
-            const image = await manipulateAsync(result.assets[0].uri, [],{ compress: 1, base64: true });
-            console.log('Camera');
-            console.log(saveImage);
-            if (image.base64)
-                await saveImage(image.base64)
-                    .catch(erro => console.log(erro))
+        console.log('CLICOU!!!!!!!!!')
+        try {
+            console.log('---AAA---')
+            const result = await ImagePicker.launchCameraAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                quality: 1
+            });
+
+            console.log('---BBB---')
+            
+            if (!result.canceled) {
+                const image = await manipulateAsync(result.assets[0].uri, [],{ compress: 1, base64: true });
+                console.log('Camera');
+                console.log(saveImage);
+                if (image.base64)
+                    await saveImage(image.base64)
+                        .catch(erro => console.log(erro))
+            }
+
+        } catch(e) {
+            console.log('---CCC---')
+            console.log(e);
+            Alert.alert('Erro ao acessar camera', 'Verifique se a permissão de usar a câmera está liberada. \n\nErro:\n ' + e)
         }
 
     }, [type, saveImage]);
@@ -104,21 +115,27 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             return;
         }
 
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            quality: 1,
-            base64: true
-        });
-        
-        if (!result.canceled) {
-            const image = await manipulateAsync(result.assets[0].uri, [],{ compress: 1, base64: true });
-            console.log('Galeria');
-            console.log(saveImage);
-            if (image.base64)
-                await saveImage(image.base64)
-                    .catch(erro => console.log(erro))
+        try {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                quality: 1,
+                base64: true
+            });
+            
+            if (!result.canceled) {
+                const image = await manipulateAsync(result.assets[0].uri, [],{ compress: 1, base64: true });
+                console.log('Galeria');
+                console.log(saveImage);
+                if (image.base64)
+                    await saveImage(image.base64)
+                        .catch(erro => console.log(erro))
+            }
+        } catch(e) {
+            console.log(e);
+            Alert.alert('Erro ao acessar camera', 'Verifique se a permissão de usar a câmera está liberada. \n\nErro:\n ' + e)
         }
+
 
     }, [type, saveImage]);
     //======
