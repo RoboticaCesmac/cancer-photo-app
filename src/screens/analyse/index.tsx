@@ -18,8 +18,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Dimensions } from 'react-native';
 import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
 
-
-
 export interface AnalyseScreenProps {
 }
 
@@ -72,13 +70,14 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
     }, []);
     //======
     const handleCamera = React.useCallback(async () => {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+        console.log(status);
         //Erro
         if (status !== "granted") {
             Alert.alert('Erro', 'Apenas é possivel usar esse recurso caso libere a função de câmera');
             return;
         }
-
+        
         console.log('CLICOU!!!!!!!!!')
         try {
             console.log('---AAA---')
@@ -104,6 +103,7 @@ export function AnalyseScreen (props: AnalyseScreenProps) {
             console.log(e);
             Alert.alert('Erro ao acessar camera', 'Verifique se a permissão de usar a câmera está liberada. \n\nErro:\n ' + e)
         }
+        
 
     }, [type, saveImage]);
     //======

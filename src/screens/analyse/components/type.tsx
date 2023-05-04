@@ -25,10 +25,10 @@ const TypeAnalyse = (props: TypeAnalyseProps) => {
 
         <ButtonImage style={{margin: 10}} onPress={openHelp}  label="Ajude a escolher"  />
         <View style={styles.buttons}>
-            <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('cancer')}  label="Câncer" size='small'  />
-            <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('leucoplasia')}  label="Leucoplasia" size='small' />
-            <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('eritroplasia')}  label="Eritroplasia"  size='small' />
-            <ButtonImage style={{margin: 5, width: 110}} onPress={() => handleSelectType('qa')}  label="Queilite Actinica " size='small' />
+            <ButtonImage style={{margin: 5, width: 110, height: 80}} onPress={() => handleSelectType('cancer')}  label="Câncer" size='small'  />
+            <ButtonImage style={{margin: 5, width: 110, height: 80}} onPress={() => handleSelectType('leucoplasia')}  label="Leucoplasia" size='small' />
+            <ButtonImage style={{margin: 5, width: 110, height: 80}} onPress={() => handleSelectType('eritroplasia')}  label="Eritroplasia"  size='small' />
+            <ButtonImage style={{margin: 5, width: 110, height: 80}} onPress={() => handleSelectType('qa')}  label={"Queilite Actinica "} size='small' />
         </View>
 
         <Modalize ref={modal} modalTopOffset={300}>
