@@ -20,7 +20,8 @@
           "photosPermission": "O aplicativo precisa acessar as fotos que serão enviadas para análise da presença de câncer",
           "cameraPermission": "O aplicativo precisa acessar a sua câmera para permitir tirar fotos que serão enviadas para análise da presença de câncer"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "ios": {
       "supportsTablet": true

@@ -2,7 +2,7 @@ import React from 'react';
 import { MainNavigation } from './src/navigation';
 import { useFonts, Spartan_400Regular, Spartan_700Bold } from '@expo-google-fonts/spartan';
 import { LoadingScreen } from './src/loading';
-import { StatusBar, View } from 'react-native';
+import { StatusBar, Text, View } from 'react-native';
 import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { useCallback } from 'react';

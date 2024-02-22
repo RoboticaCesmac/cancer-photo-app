@@ -31,7 +31,7 @@ const TypeAnalyse = (props: TypeAnalyseProps) => {
             <ButtonImage style={{margin: 5, width: 110, height: 80}} onPress={() => handleSelectType('qa')}  label={"Queilite Actinica "} size='small' />
         </View>
 
-        <Modalize ref={modal} modalTopOffset={300}>
+        <Modalize ref={modal} adjustToContentHeight={true} modalTopOffset={300}>
             <ScrollView contentContainerStyle={styles.modalContainer}>
                 <Text style={styles.modalTitle}>AJUDE A ESCOLHER</Text>
                 <Text style={styles.modalTitle}>LESÕES POTENCIALMENTE MALIGNAS</Text>
