@@ -27,16 +27,18 @@ export function CreditsScreen (props: CreditsScreenProps) {
             <AppHeader title="Créditos" />
             <ScrollView style={styles.container}>
 
-                <Text style={[styles.text, {textAlign:'center', marginBottom: 20}]}>Este é um Projeto desenvolvido no Centro Universitário CESMAC entre os membros:</Text>
+                <Text style={[styles.text, {textAlign:'center', marginBottom: 20}]}>Este é um Projeto financiado pelo <Text style={{fontWeight:'bold'}}>PPSUS</Text> com parceria CNPq, Ministério da Saúde, FAPEAL e SESAU, e desenvolvido no Centro Universitário CESMAC entre os membros:</Text>
                 {names.map((name, key) => (
                     <Text style={styles.text} key={key}>- {name}</Text>
                 ))}
 
 
+
                 <Text style={styles.textSpecial}>AGRADECIMENTO À EQUIPE DO NÚCLEO DE DIAGNÓSTICO BUCAL (NDB UFES),  AS PROFESSORAS DANIELLE CAMISASCA, LILIANA BARROS, TÂNIA VELLOSO, VANESSA DE CARLA BATISTA DOS SANTOS e ADRIANA TEREZINHA NEVES NOVELINO ALVES POR DISPONIBILIZAR IMAGENS PARA A REALIZAÇÃO DO APLICATIVO.</Text>
                 <View style={{flex:1, justifyContent:'flex-end', marginTop: 20}}>
                     <Image source={require('./../../assets/logos/cesmac.png')} style={{alignSelf:'center'}}/>
-                    <View style={{justifyContent:'space-around', flexDirection: 'row', marginTop:10}}>
+                    <Image source={require('./../../assets/logos/ppsus.png')} />
+                    <View style={{justifyContent:'space-around', flexDirection: 'row', marginTop:10}}>    
                         <Image source={require('./../../assets/logos/mpps.png')} />
                         <Image source={require('./../../assets/logos/cit.png')} />
                     </View>
