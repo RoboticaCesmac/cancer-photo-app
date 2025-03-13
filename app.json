@@ -10,6 +10,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ec3237"
     },
+    "newArchEnabled": true,
     "assetBundlePatterns": [
       "**/*"
     ],
